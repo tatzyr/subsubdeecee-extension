@@ -18,12 +18,13 @@
     }
 
     video.setAttribute("crossorigin", "anonymous");
-    const track = document.createElement("track");
-    const lang = "ja"; // TODO: Multilingual support
-    track.setAttribute("src", `https://tatzyr.github.io/subsubdeecee-vtts/${event}/${lang}/${videoId}.vtt`);
-    track.setAttribute("srclang", lang);
-    track.setAttribute("label", `SubSubDeeCee (${lang})`);
-    video.appendChild(track);
+    for (const lang of ["ja", "ko", "vi"]) {
+      const track = document.createElement("track");
+      track.setAttribute("src", `https://tatzyr.github.io/subsubdeecee-vtts/${event}/${lang}/${videoId}.vtt`);
+      track.setAttribute("srclang", lang);
+      track.setAttribute("label", `SubSubDeeCee (${lang})`);
+      video.appendChild(track);
+    }
   }
 
   main().catch(console.error);

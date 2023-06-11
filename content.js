@@ -23,6 +23,12 @@
       track.setAttribute("src", `https://tatzyr.github.io/subsubdeecee-vtts/${event}/${lang}/${videoId}.vtt`);
       track.setAttribute("srclang", lang);
       track.setAttribute("label", `SubSubDeeCee (${lang})`);
+
+      track.addEventListener("error", () => {
+        console.error(`Failed to load WebVTT file for ${lang}`);
+        video.removeChild(track);
+      });
+
       video.appendChild(track);
     }
   }

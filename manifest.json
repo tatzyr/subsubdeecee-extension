@@ -1,29 +1,21 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "SubSubDeeCee",
   "version": "1.0.2",
   "description": "Multilingual subtitles to WWDC videos",
-  "developer": {
-    "name": "Tatsuya Otsuka",
-    "url": "https://github.com/tatzyr"
-  },
-  "permissions": [
-    "webRequest",
-    "webRequestBlocking",
-    "https://developer.apple.com/*"
-  ],
   "background": {
-    "scripts": ["background.js"],
-    "persistent": true
+    "service_worker": "background.js"
   },
   "content_scripts": [
     {
-      "matches": ["https://developer.apple.com/*"],
+      "matches": ["https://developer.apple.com/videos/play/*"],
       "js": ["content.js"]
     }
   ],
   "icons": {
+    "16": "icon16.png",
     "48": "icon48.png",
-    "96": "icon96.png"
+    "96": "icon96.png",
+    "128": "icon128.png"
   }
 }

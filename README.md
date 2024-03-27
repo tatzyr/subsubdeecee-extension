@@ -1,6 +1,6 @@
 # SubSubDeeCee
 
-A Firefox extension that adds multilingual subtitles to WWDC videos.
+A browser extension that adds multilingual subtitles to WWDC videos.
 
 ## How to use
 

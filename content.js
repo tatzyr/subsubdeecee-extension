@@ -1,4 +1,5 @@
 // @ts-check
+/// <reference path="./types.d.ts" />
 
 (function () {
   async function main() {
@@ -17,17 +18,20 @@
       await new Promise((resolve) => { setTimeout(resolve, 100); });
     }
 
-    video.setAttribute("crossorigin", "anonymous");
     for (const lang of ["ja", "ko", "vi"]) {
+      const b = globalThis.browser ?? globalThis.chrome;
+      const { data, error } = await b.runtime.sendMessage({
+        action: "fetchSubtitles",
+        url: `https://tatzyr.github.io/subsubdeecee-vtts/${event}/${lang}/${videoId}.vtt`,
+      });
+      if (error) {
+        console.error(`Failed to fetch subtitles. ${error.name}: ${error.message}`);
+        continue;
+      }
       const track = document.createElement("track");
-      track.setAttribute("src", `https://tatzyr.github.io/subsubdeecee-vtts/${event}/${lang}/${videoId}.vtt`);
+      track.setAttribute("src", URL.createObjectURL(new Blob([data], { type: "text/vtt" })));
       track.setAttribute("srclang", lang);
       track.setAttribute("label", `SubSubDeeCee (${lang})`);
-
-      track.addEventListener("error", () => {
-        console.error(`Failed to load WebVTT file for ${lang}`);
-        video.removeChild(track);
-      });
 
       video.appendChild(track);
     }

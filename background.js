@@ -1,34 +1,23 @@
 // @ts-check
+/// <reference path="./types.d.ts" />
 
-/**
- * @param {import("webextension-polyfill").WebRequest.OnHeadersReceivedDetailsType} details
- */
-function handleHeaders(details) {
-  if (!details.responseHeaders) {
-    return;
-  }
-  for (let i = 0; i < details.responseHeaders.length; i++) {
-    if (details.responseHeaders[i].name.toLowerCase() === "content-security-policy") {
-      // @ts-ignore
-      details.responseHeaders[i].value = details.responseHeaders[i].value.replace("default-src 'self'", "default-src 'self' tatzyr.github.io")
+const b = globalThis.browser ?? globalThis.chrome;
+
+b.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  (async () => {
+    if (message.action === "fetchSubtitles" && message.url) {
+      try {
+        const res = await fetch(message.url);
+        if (!res.ok) {
+          throw new Error(`HTTP Error: status: ${res.status}, url: ${message.url}`);
+        }
+        // @ts-ignore
+        sendResponse({ data: await res.text(), error: null });
+      } catch (e) {
+        // @ts-ignore
+        sendResponse({ data: null, error: { name: e.name, message: e.message } });
+      }
     }
-  }
-
-  return { responseHeaders: details.responseHeaders }
-}
-
-function init() {
-  /**
-   * @type {import("webextension-polyfill").Browser}
-   */
-  // @ts-ignore
-  const b = chrome;
-
-  /**
-   * @type {import("webextension-polyfill").WebRequest.RequestFilter}
-   */
-  const filter = { urls: ['https://developer.apple.com/*'], types: ['main_frame', 'sub_frame'] };
-  b.webRequest.onHeadersReceived.addListener(handleHeaders, filter, ["blocking", "responseHeaders"]);
-}
-
-init();
+  })();
+  return true;
+});

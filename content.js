@@ -18,7 +18,6 @@
       await new Promise((resolve) => { setTimeout(resolve, 100); });
     }
 
-    video.setAttribute("crossorigin", "anonymous");
     for (const lang of ["ja", "ko", "vi"]) {
       const b = globalThis.browser ?? globalThis.chrome;
       const { data, error } = await b.runtime.sendMessage({

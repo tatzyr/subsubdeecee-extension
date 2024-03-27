@@ -4,6 +4,7 @@
   "version": "1.0.2",
   "description": "Multilingual subtitles to WWDC videos",
   "background": {
+    "scripts": ["background.js"],
     "service_worker": "background.js"
   },
   "content_scripts": [

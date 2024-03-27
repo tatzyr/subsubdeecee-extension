@@ -1,4 +1,5 @@
 // @ts-check
+/// <reference path="./types.d.ts" />
 
 (function () {
   async function main() {
@@ -19,12 +20,7 @@
 
     video.setAttribute("crossorigin", "anonymous");
     for (const lang of ["ja", "ko", "vi"]) {
-      /**
-       * @type {import("webextension-polyfill").Browser}
-       */
-      // @ts-ignore
-      const b = chrome;
-      
+      const b = globalThis.browser ?? globalThis.chrome;
       const { data, error } = await b.runtime.sendMessage({
         action: "fetchSubtitles",
         url: `https://tatzyr.github.io/subsubdeecee-vtts/${event}/${lang}/${videoId}.vtt`,

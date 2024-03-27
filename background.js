@@ -1,8 +1,7 @@
 // @ts-check
+/// <reference path="./types.d.ts" />
 
-/** @type {import("webextension-polyfill").Browser} */
-// @ts-ignore
-const b = chrome;
+const b = globalThis.browser ?? globalThis.chrome;
 
 b.runtime.onMessage.addListener((message, sender, sendResponse) => {
   (async () => {

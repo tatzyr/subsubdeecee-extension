@@ -3,21 +3,24 @@
 
 const b = globalThis.browser ?? globalThis.chrome;
 
-b.runtime.onMessage.addListener((message, sender, sendResponse) => {
+/** @type {MessageListner} */
+const listner = (message, _sender, sendResponse) => {
   (async () => {
-    if (message.action === "fetchSubtitles" && message.url) {
-      try {
-        const res = await fetch(message.url);
+    try {
+      if (message.action === "fetchSubtitles") {
+        const { event, lang, videoId } = message.payload;
+        const url = `https://tatzyr.github.io/subsubdeecee-vtts/${event}/${lang}/${videoId}.vtt`;
+        const res = await fetch(url);
         if (!res.ok) {
-          throw new Error(`HTTP Error: status: ${res.status}, url: ${message.url}`);
+          throw new Error(`HTTP Error: status: ${res.status}, url: ${url}`);
         }
-        // @ts-ignore
         sendResponse({ data: await res.text(), error: null });
-      } catch (e) {
-        // @ts-ignore
-        sendResponse({ data: null, error: { name: e.name, message: e.message } });
       }
+    } catch (e) {
+      sendResponse({ data: null, error: { name: e.name, message: e.message } });
     }
   })();
   return true;
-});
+};
+
+b.runtime.onMessage.addListener(listner);

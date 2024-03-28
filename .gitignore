@@ -133,4 +133,5 @@ dist
 .pnp.*
 
 
-dist.zip
+dist_chrome.zip
+dist_firefox.zip

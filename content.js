@@ -1,7 +1,7 @@
 // @ts-check
 /// <reference path="./types.d.ts" />
 
-(function () {
+(() => {
   async function main() {
     const m = location.href.match(/^https:\/\/developer\.apple\.com\/videos\/play\/([^/]+)\/([^/]+)/);
     if (!m) {
@@ -16,7 +16,9 @@
       if (video) {
         break;
       }
-      await new Promise((resolve) => { setTimeout(resolve, 100); });
+      await new Promise((resolve) => {
+        setTimeout(resolve, 100);
+      });
     }
 
     for (const lang of ["ja", "ko", "vi"]) {

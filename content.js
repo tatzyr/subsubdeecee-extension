@@ -21,7 +21,13 @@
       });
     }
 
-    for (const lang of ["ja", "ko", "vi"]) {
+    const languages = {
+      ja: "日本語",
+      ko: "한국어",
+      vi: "Tiếng Việt",
+    };
+
+    for (const [lang, langLabel] of Object.entries(languages)) {
       const b = globalThis.browser ?? globalThis.chrome;
       /** @type {MessageRequest} */
       const message = { action: "fetchSubtitles", payload: { event, lang, videoId } };
@@ -34,7 +40,7 @@
       const track = document.createElement("track");
       track.setAttribute("src", URL.createObjectURL(new Blob([data], { type: "text/vtt" })));
       track.setAttribute("srclang", lang);
-      track.setAttribute("label", `SubSubDeeCee (${lang})`);
+      track.setAttribute("label", `${langLabel} (SubSubDeeCee)`);
 
       video.appendChild(track);
     }

@@ -20,7 +20,7 @@ type MessageResponse =
       error: Error;
     };
 
-type MessageListner = (
+type MessageListener = (
   message: MessageRequest,
   sender: import("webextension-polyfill").Runtime.MessageSender,
   sendResponse: (response: MessageResponse) => void,

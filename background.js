@@ -28,8 +28,8 @@ STYLE
   );
 };
 
-/** @type {MessageListner} */
-const listner = (message, _sender, sendResponse) => {
+/** @type {MessageListener} */
+const listener = (message, _sender, sendResponse) => {
   (async () => {
     try {
       if (message.action === "fetchSubtitles") {
@@ -48,4 +48,4 @@ const listner = (message, _sender, sendResponse) => {
   return true;
 };
 
-b.runtime.onMessage.addListener(listner);
+b.runtime.onMessage.addListener(listener);

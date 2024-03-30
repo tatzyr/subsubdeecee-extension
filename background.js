@@ -3,6 +3,31 @@
 
 const b = globalThis.browser ?? globalThis.chrome;
 
+/** @type {(vttText: string) => string} */
+const enhanceVtt = (vttText) => {
+  const isChromium = !globalThis.browser && globalThis.chrome;
+  // In Firefox, subtitles are already easy to read so do nothing.
+  if (!isChromium) {
+    return vttText;
+  }
+  // In Chromium (Chrome, Chromium Edge), add styles to subtitles.
+  return vttText.replace(
+    /^WEBVTT\n\n/,
+    `WEBVTT
+
+STYLE
+::cue {
+  color: #ffffff;
+  font-size: 1em;
+  font-weight: 600;
+  /* background is not supported so use text-shadow instead */
+  text-shadow: #000000 0px 0px 0.2em, #000000 0px 0px 0.2em, #000000 0px 0px 0.2em, #000000 0px 0px 0.2em;
+}
+
+`,
+  );
+};
+
 /** @type {MessageListner} */
 const listner = (message, _sender, sendResponse) => {
   (async () => {
@@ -14,7 +39,7 @@ const listner = (message, _sender, sendResponse) => {
         if (!res.ok) {
           throw new Error(`HTTP Error: status: ${res.status}, url: ${url}`);
         }
-        sendResponse({ data: await res.text(), error: null });
+        sendResponse({ data: enhanceVtt(await res.text()), error: null });
       }
     } catch (e) {
       sendResponse({ data: null, error: { name: e.name, message: e.message } });

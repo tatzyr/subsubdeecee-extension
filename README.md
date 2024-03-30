@@ -4,8 +4,6 @@ A browser extension that adds multilingual subtitles to WWDC videos.
 
 ## Installation
 
-Firefox is recommended since the subtitles are hard to read in Chrome.
-
 ### Firefox
 
 https://addons.mozilla.org/firefox/addon/subsubdeecee/

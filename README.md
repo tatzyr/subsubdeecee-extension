@@ -19,7 +19,13 @@ https://chromewebstore.google.com/detail/subsubdeecee/jlbgcnchiacloliicaflpdjadj
 1. Click on 'SubSubDeeCee'.
 1. Subtitles will be displayed.
 
+## Supported Languages
+
+* Japanese (日本語)
+* Korean (한국어)
+* Thai (ภาษาไทย)
+* Vietnamese (Tiếng Việt)
+
 ## Tips
 
-* If the subtitles do not appear, select the subtitles again from the bottom right of the video player, or reload the page.
 * Subtitle data is stored in a separate repository: https://github.com/tatzyr/subsubdeecee-vtts/tree/gh-pages/docs

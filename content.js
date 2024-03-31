@@ -24,6 +24,7 @@
     const languages = {
       ja: "日本語",
       ko: "한국어",
+      th: "ภาษาไทย",
       vi: "Tiếng Việt",
     };
 

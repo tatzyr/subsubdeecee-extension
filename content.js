@@ -28,7 +28,7 @@
     /** @type {FetchLanguagesResponse} */
     const { data: languages, error } = await b.runtime.sendMessage(message);
     if (error) {
-      console.error(`Failed to fetch languages. ${error.name}: ${error.message}`);
+      console.info("[SubSubDeeCee] Failed to fetch languages.", error);
       return;
     }
 
@@ -38,7 +38,7 @@
       /** @type {FetchSubtitlesResponse} */
       const { data: vttText, error } = await b.runtime.sendMessage(message);
       if (error) {
-        console.error(`Failed to fetch subtitles. ${error.name}: ${error.message}`);
+        console.info("[SubSubDeeCee] Failed to fetch subtitles.", error);
         continue;
       }
       const track = document.createElement("track");
@@ -51,5 +51,7 @@
     }
   }
 
-  main().catch(console.error);
+  main().catch((error) => {
+    console.error("[SubSubDeeCee] Unknown error occurred.", error);
+  });
 })();

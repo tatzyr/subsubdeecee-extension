@@ -23,5 +23,7 @@ https://chromewebstore.google.com/detail/subsubdeecee/jlbgcnchiacloliicaflpdjadj
 
 * Japanese (日本語)
 * Korean (한국어)
-* Thai (ภาษาไทย)
+* Thai (ไทย)
 * Vietnamese (Tiếng Việt)
+* Simplified Chinese (简体中文)
+* Traditional Chinese (繁體中文)

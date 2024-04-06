@@ -25,7 +25,3 @@ https://chromewebstore.google.com/detail/subsubdeecee/jlbgcnchiacloliicaflpdjadj
 * Korean (한국어)
 * Thai (ภาษาไทย)
 * Vietnamese (Tiếng Việt)
-
-## Tips
-
-* Subtitle data is stored in a separate repository: https://github.com/tatzyr/subsubdeecee-vtts/tree/gh-pages/docs

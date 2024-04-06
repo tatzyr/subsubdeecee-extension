@@ -21,26 +21,30 @@
       });
     }
 
-    const languages = {
-      ja: "日本語",
-      ko: "한국어",
-      th: "ภาษาไทย",
-      vi: "Tiếng Việt",
-    };
+    const b = globalThis.browser ?? globalThis.chrome;
 
-    for (const [lang, langLabel] of Object.entries(languages)) {
-      const b = globalThis.browser ?? globalThis.chrome;
-      /** @type {MessageRequest} */
+    /** @type {FetchLanguagesRequest} */
+    const message = { action: "fetchLanguages", payload: { event } };
+    /** @type {FetchLanguagesResponse} */
+    const { data: languages, error } = await b.runtime.sendMessage(message);
+    if (error) {
+      console.error(`Failed to fetch languages. ${error.name}: ${error.message}`);
+      return;
+    }
+
+    for (const lang of languages) {
+      /** @type {FetchSubtitlesRequest} */
       const message = { action: "fetchSubtitles", payload: { event, lang, videoId } };
-      /** @type {MessageResponse} */
-      const { data, error } = await b.runtime.sendMessage(message);
+      /** @type {FetchSubtitlesResponse} */
+      const { data: vttText, error } = await b.runtime.sendMessage(message);
       if (error) {
         console.error(`Failed to fetch subtitles. ${error.name}: ${error.message}`);
         continue;
       }
       const track = document.createElement("track");
-      track.setAttribute("src", URL.createObjectURL(new Blob([data], { type: "text/vtt" })));
+      track.setAttribute("src", URL.createObjectURL(new Blob([vttText], { type: "text/vtt" })));
       track.setAttribute("srclang", lang);
+      const langLabel = new Intl.DisplayNames([], { type: "language" }).of(lang);
       track.setAttribute("label", `${langLabel} (SubSubDeeCee)`);
 
       video.appendChild(track);

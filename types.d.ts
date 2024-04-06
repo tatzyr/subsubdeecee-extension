@@ -1,7 +1,14 @@
 // biome-ignore lint/style/noVar:
 declare var browser: import("webextension-polyfill").Browser;
 
-type MessageRequest = {
+type FetchLanguagesRequest = {
+  action: "fetchLanguages";
+  payload: {
+    event: string;
+  };
+};
+
+type FetchSubtitlesRequest = {
   action: "fetchSubtitles";
   payload: {
     event: string;
@@ -10,7 +17,17 @@ type MessageRequest = {
   };
 };
 
-type MessageResponse =
+type FetchLanguagesResponse =
+  | {
+      data: string[];
+      error: null;
+    }
+  | {
+      data: null;
+      error: Error;
+    };
+
+type FetchSubtitlesResponse =
   | {
       data: string;
       error: null;
@@ -21,7 +38,7 @@ type MessageResponse =
     };
 
 type MessageListener = (
-  message: MessageRequest,
+  message: FetchLanguagesRequest | FetchSubtitlesRequest,
   sender: import("webextension-polyfill").Runtime.MessageSender,
-  sendResponse: (response: MessageResponse) => void,
+  sendResponse: (response: FetchLanguagesResponse | FetchSubtitlesResponse) => void,
 ) => true;

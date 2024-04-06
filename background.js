@@ -30,7 +30,7 @@ STYLE
 
 /** @type {(event: string) => Promise<string[]>} */
 const fetchLanguages = async (event) => {
-  const url = `https://tatzyr.github.io/subsubdeecee-vtts/${event}/languages.json`;
+  const url = `https://subsubdeecee-vtts.pages.dev/${event}/languages.json`;
   const res = await fetch(url);
   if (!res.ok) {
     throw new Error(`HTTP Error: status: ${res.status}, url: ${url}`);
@@ -40,7 +40,7 @@ const fetchLanguages = async (event) => {
 
 /** @type {(event: string, lang: string, videoId: string) => Promise<string>} */
 const fetchSubtitles = async (event, lang, videoId) => {
-  const url = `https://tatzyr.github.io/subsubdeecee-vtts/${event}/${lang}/${videoId}.vtt`;
+  const url = `https://subsubdeecee-vtts.pages.dev/${event}/${lang}/${videoId}.vtt`;
   const res = await fetch(url);
   if (!res.ok) {
     throw new Error(`HTTP Error: status: ${res.status}, url: ${url}`);

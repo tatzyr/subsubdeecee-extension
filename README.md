@@ -2,6 +2,9 @@
 
 A browser extension that adds multilingual subtitles to WWDC videos.
 
+> [!NOTE]
+> These subtitles are unofficial and are provided for informational purposes only. They may not be accurate and are not a substitute for official content. These subtitles are neither endorsed by nor affiliated with the original content creators. Use these subtitles at your own risk. The provider of these subtitles assumes no liability for any loss or damage caused by errors or inaccuracies in the subtitles.
+
 ## Installation
 
 ### Firefox

@@ -13,7 +13,7 @@ dist:
 dist/background.js dist/content.js: dist
 	grep -vE "///|@ts-|@type" $(notdir $@) > $@
 
-dist/icon16.png dist/icon48.png dist/icon96.png dist/icon128.png: dist
+dist/LICENSE dist/README.md dist/icon16.png dist/icon48.png dist/icon96.png dist/icon128.png: dist
 	cp $(notdir $@) $@
 
 .PHONY: chrome_manifest
@@ -24,8 +24,8 @@ chrome_manifest: dist
 firefox_manifest: dist
 	cp manifest_firefox.json dist/manifest.json
 
-dist_chrome.zip: chrome_manifest dist/background.js dist/content.js dist/icon16.png dist/icon48.png dist/icon96.png dist/icon128.png
+dist_chrome.zip: chrome_manifest dist/LICENSE dist/README.md dist/background.js dist/content.js dist/icon16.png dist/icon48.png dist/icon96.png dist/icon128.png
 	(cd dist && zip -r ../$@ .)
 
-dist_firefox.zip: firefox_manifest dist/background.js dist/content.js dist/icon16.png dist/icon48.png dist/icon96.png dist/icon128.png
+dist_firefox.zip: firefox_manifest dist/LICENSE dist/README.md dist/background.js dist/content.js dist/icon16.png dist/icon48.png dist/icon96.png dist/icon128.png
 	(cd dist && zip -r ../$@ .)

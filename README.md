@@ -24,6 +24,14 @@ https://chromewebstore.google.com/detail/subsubdeecee/jlbgcnchiacloliicaflpdjadj
 
 ## Supported Languages
 
+<!--
+for (const lang of ["ja", "ko", "th", "vi", "zh-Hans", "zh-Hant"]) {
+  const enName = new Intl.DisplayNames(["en"], { type: "language" }).of(lang);
+  const nativeName = new Intl.DisplayNames([lang], { type: "language" }).of(lang);
+  console.log(`* ${enName} (${nativeName})`);
+}
+-->
+
 * Japanese (日本語)
 * Korean (한국어)
 * Thai (ไทย)

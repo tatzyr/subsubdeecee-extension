@@ -3,7 +3,7 @@
 
 (() => {
   async function main() {
-    const m = location.href.match(/^https:\/\/developer\.apple\.com\/videos\/play\/([^/]+)\/([^/]+)/);
+    const m = location.pathname.match(/\/videos\/play\/([^/]+)\/([^/]+)/);
     if (!m) {
       return;
     }

@@ -13,7 +13,7 @@
   },
   "content_scripts": [
     {
-      "matches": ["https://developer.apple.com/videos/play/*"],
+      "matches": ["https://developer.apple.com/*"],
       "js": ["content.js"]
     }
   ],
